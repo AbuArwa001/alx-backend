@@ -46,7 +46,8 @@ class Server:
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
         """
-        Returns a list of rows from the CSV file for the specified page and page size.
+        Returns a list of rows from the CSV
+        file for the specified page and page size.
 
         Args:
         page (int): The page number (1-based).
