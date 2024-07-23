@@ -13,7 +13,7 @@ class BasicCache(BaseCaching):
         """Set cache data"""
         if key and item:
             self.cache_data.update({key: item})
-    
+
     def get(self, key):
         """Get cache data"""
         return self.cache_data.get(key, None)
