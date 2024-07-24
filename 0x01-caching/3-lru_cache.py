@@ -54,6 +54,6 @@ class LRUCache(BaseCaching):
         """Get an item by key"""
         if key is None or key not in self.cache_data:
             return None
-        self.age_bits = most_recent(key, self.age_bits, self.cache_data)
+        # self.age_bits = most_recent(key, self.age_bits, self.cache_data)
         # return self.cache_data[key]
         return self.cache_data.get(key, None)
