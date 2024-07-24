@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """FIFOCache  Caching """
-BaseCaching = __import__('base_caching').BaseCaching
+BaseCaching = __import__("base_caching").BaseCaching
 
 
 def most_recent(key, age_bits, cache_data):
@@ -18,11 +18,12 @@ def most_recent(key, age_bits, cache_data):
 
 class LRUCache(BaseCaching):
     """LRUCache class Containing two methods"""
+
     def __init__(self):
         """LRUCache  class __init__ method"""
         super().__init__()
         self.age_bits = {}
-        self.discard = '0'
+        self.discard = "0"
 
     def put(self, key, item):
         """Set cache data with proper caching algorithm."""
@@ -44,8 +45,9 @@ class LRUCache(BaseCaching):
                         self.cache_data.pop(self.discard)
                         print(f"DISCARD: {self.discard}")
             else:
-                self.age_bits =
-                most_recent(key, self.age_bits, self.cache_data)
+                self.age_bits = most_recent(
+                    key, self.age_bits, self.cache_data
+                )
             if key not in self.age_bits:
                 self.age_bits.update({key: len(self.cache_data)})
             else:
