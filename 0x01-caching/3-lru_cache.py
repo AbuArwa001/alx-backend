@@ -12,33 +12,28 @@ class LRUCache(BaseCaching):
         self.discard = '0'
 
     def put(self, key, item):
-        """Set cache data"""
-        lst = list(self.cache_data)
-        ln = len(lst) + 1
+        """Set cache data with proper caching algorithm."""
+        if key is None or item is None:
+            return
 
-        if key and item:
-            if ln > BaseCaching.MAX_ITEMS:
-                for age, ky in enumerate(self.cache_data):
-                    if key == ky:
-                        continue
-                    update = self.age_bits.get(ky, None)
-                    # print(f"age: {age}")
-                    if update and update > 0:
-                        update -= 1
-                        self.age_bits.update({ky: update})
-                    elif update == 0 and key not in self.age_bits:
-                        self.discard = ky
-                        self.age_bits.pop(self.discard)
+        if key in self.cache_data:
+            self.cache_data[key] = item
+            self.age_bits[key] = BaseCaching.MAX_ITEMS - 1
+        else:
+            if len(self.cache_data) >= BaseCaching.MAX_ITEMS:
+                # Find the key to discard
+                discard_key = min(self.age_bits, key=self.age_bits.get)
+                self.cache_data.pop(discard_key)
+                self.age_bits.pop(discard_key)
+                print(f"DISCARD: {discard_key}")
 
-                # del self.cache_data[self.discard]
-                if key not in self.age_bits:
-                    self.cache_data.pop(self.discard)
-                    print(f"DISCARD: {self.discard}")
-            if key not in self.age_bits:
-                self.age_bits.update({key: len(self.cache_data)})
-            else:
-                self.age_bits.update({key: 3})
-            self.cache_data.update({key: item})
+            self.cache_data[key] = item
+            self.age_bits[key] = BaseCaching.MAX_ITEMS - 1
+
+        # Update age bits for all other keys
+        for k in list(self.age_bits):
+            if k != key:
+                self.age_bits[k] -= 1
 
     def get(self, key):
         """Get cache data"""
