@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Initiating module
+Flask app initialization module
 """
 from flask import Flask, render_template
 from flask_babel import Babel
@@ -8,12 +8,12 @@ from flask_babel import Babel
 
 class Config:
     LANGUAGES = ["en", "fr"]
+    BABEL_DEFAULT_LOCALE = "en"
+    BABEL_DEFAULT_TIMEZONE = "UTC"
 
 
-conf = Config()
 app = Flask(__name__)
-app.config['BABEL_DEFAULT_LOCALE'] = conf.LANGUAGES[0]
-app.config['BABEL_DEFAULT_TIMEZONE'] = "UTC"
+app.config.from_object(Config)
 
 babel = Babel(app)
 
@@ -21,6 +21,6 @@ babel = Babel(app)
 @app.route('/')
 def index():
     """
-    Function to display doc STring
+    Renders the home page.
     """
     return render_template('1-index.html')
