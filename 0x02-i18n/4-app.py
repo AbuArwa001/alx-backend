@@ -18,19 +18,21 @@ class Config:
 
 app = Flask(__name__)
 app.config.from_object(Config)
-app.url_map.strict_slashes = False
+
 babel = Babel(app)
 
 
 @babel.localeselector
-def get_locale():
-    """
-    GET locale of a user
-    """
-    # Use the app configuration directly
-    return request.accept_languages.best_match(app.config['LANGUAGES'])
+def get_locale() -> str:
+    """Retrieves the locale for a web page.
 
-# babel.init_app(app, locale_selector=get_locale)
+    Returns:
+        str: best match
+    """
+    locale = request.args.get('locale')
+    if locale in app.config['LANGUAGES']:
+        return locale
+    return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
 @app.route('/')
@@ -38,4 +40,4 @@ def index():
     """
     Renders the home page.
     """
-    return render_template('3-index.html')
+    return render_template('2-index.html')
