@@ -23,4 +23,4 @@ def index():
     """
     Function to display doc STring
     """
-    return render_template('0-index.html')
+    return render_template('1-index.html')
