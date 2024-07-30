@@ -17,10 +17,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.15.0\n"
 
-#: app/email.py:21
-msgid "[home_title] Bienvenue chez Holberton"
-msgstr "[home_title] Welcome to Holberton"
+#: templates/3-index.html:4 templates/4-index.html:4 templates/5-index.html:4
+msgid "home_title"
+msgstr "Bienvenue chez Holberton"
 
-#: app/email.py:21
-msgid "[home_header] Bonjour monde!"
-msgstr "[home_header] Hello world!"
+#: templates/3-index.html:7 templates/4-index.html:7 templates/5-index.html:7
+msgid "home_header"
+msgstr "Bonjour monde!"
