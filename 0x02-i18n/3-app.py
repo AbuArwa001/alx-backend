@@ -37,4 +37,4 @@ def index():
     """
     Renders the home page.
     """
-    return render_template('2-index.html')
+    return render_template('3-index.html')
